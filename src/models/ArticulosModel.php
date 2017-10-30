@@ -1,15 +1,10 @@
 <?php
 namespace src\models;
-use src\lib\Database;
 
-class ArticulosModel{
 
-    private $conexion;
+class ArticulosModel extends BaseModel{
 
-    function __construct(){
-        $this->conexion= Database::getConection();
-    }
-
+    
     function getAll(){
         return $this->conexion->from('articulos')->fetchAll();
     }

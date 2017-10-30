@@ -1,14 +1,7 @@
 <?php
 namespace src\models;
-use src\lib\Database;
 
-class AutoresModel{
-
-    private $conexion;
-    
-        function __construct(){
-            $this->conexion= Database::getConection();
-        }
+class AutoresModel extends BaseModel{
     
         function getAll(){
             return $this->conexion->from('autores')->fetchAll();

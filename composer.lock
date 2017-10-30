@@ -39,16 +39,16 @@
         },
         {
             "name": "lichtner/fluentpdo",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/envms/fluentpdo.git",
-                "reference": "a1616eb2bf0ecdac4689d6261be49c036d85c368"
+                "reference": "2bb54b27e6d53c35329ac7e651d869ac52f1944a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/envms/fluentpdo/zipball/a1616eb2bf0ecdac4689d6261be49c036d85c368",
-                "reference": "a1616eb2bf0ecdac4689d6261be49c036d85c368",
+                "url": "https://api.github.com/repos/envms/fluentpdo/zipball/2bb54b27e6d53c35329ac7e651d869ac52f1944a",
+                "reference": "2bb54b27e6d53c35329ac7e651d869ac52f1944a",
                 "shasum": ""
             },
             "type": "library",
@@ -64,18 +64,24 @@
             ],
             "authors": [
                 {
-                    "name": "Marek Lichtner",
-                    "homepage": "http://licht.sk/"
+                    "name": "envms",
+                    "homepage": "http://env.ms"
                 }
             ],
-            "description": "FluentPDO is small PHP library for rapid query building. Killer feature is smart join builder which generates joins automatically.",
-            "homepage": "https://github.com/fpdo/fluentpdo",
+            "description": "FluentPDO is a quick and light PHP library for rapid query building. It features a smart join builder, which automatically creates table joins.",
+            "homepage": "https://github.com/envms/fluentpdo",
             "keywords": [
+                "builder",
                 "database",
+                "db",
                 "dbal",
-                "pdo"
+                "fluent",
+                "mysql",
+                "oracle",
+                "pdo",
+                "query"
             ],
-            "time": "2017-09-05T14:22:18+00:00"
+            "time": "2017-10-13T15:23:44+00:00"
         },
         {
             "name": "nikic/fast-route",
