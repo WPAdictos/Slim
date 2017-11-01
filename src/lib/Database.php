@@ -3,7 +3,7 @@ namespace src\lib;
 use PDO;
 use FluentPDO;
 
-require_once 'src/config/'.ENTORNO.'/configDB.php';
+require_once BASE_PATH . '/src/config/'.ENTORNO.'/configDB.php';
 
 
 class Database{
