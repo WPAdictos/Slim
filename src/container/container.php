@@ -4,6 +4,8 @@ use \src\models\AutoresModel;
 use \src\lib\Persona;
 use \src\lib\Marca;
 
+require_once BASE_PATH . '/src/config/'.ENTORNO.'/configDB.php';
+
 $container = $app->getContainer();
 
 $container['persona'] = function ($container) {
@@ -40,6 +42,12 @@ $container['logger'] = function($container) {
     return $logger;
 };
 
+$container['pdo'] = function ($container) {
+    $container['logger']->addInfo("DSN=", array('dsn' => DSN));
+    $pdo = new PDO (DSN, USER, PASSWORD);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $pdo;
+};
 
 $container['notFoundHandler'] = function($container) {
     return function ($request, $response) use ($container) {

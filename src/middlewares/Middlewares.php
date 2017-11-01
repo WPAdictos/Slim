@@ -1,5 +1,7 @@
 <?php
 
+use \Slim\Middleware\HttpBasicAuthentication\PdoAuthenticator;
+
 //Force SSL
 if(FORCE_HTTPS === 'true'){
     $app->add(function ($request,   $response, $next) {
@@ -13,6 +15,32 @@ if(FORCE_HTTPS === 'true'){
 }
 
 
+$container["HttpBasicAuthentication"] = function ($container) {
+    $pdo=$container['pdo'];
+    return new \Slim\Middleware\HttpBasicAuthentication([
+        "path" => ["/token"],
+        "realm" => "Protected",
+        "secure" => true,
+        "relaxed" => ["localhost"],
+        "authenticator" => new PdoAuthenticator([
+            "pdo" => $pdo,
+            "table" => "accounts",
+            "user" => "username",
+            "hash" => "hashed"
+        ]),
+        "error" => function ($request, $response, $arguments) {
+            return $response->withJson(array('error'=>'Credenciales incorrectas'), 403);
+        },
+        "callback" => function ($request, $response, $arguments) {
+            //print_r($arguments);
+            //$response->withoutHeader("WWW-Authenticate");
+            return $response;
+        }
+    ]);
+};
+$app->add("HttpBasicAuthentication");
+
+/*
 $app->add(new \Slim\Middleware\HttpBasicAuthentication([
     "path" => ["/token"],
     "realm" => "Protected",
@@ -26,11 +54,12 @@ $app->add(new \Slim\Middleware\HttpBasicAuthentication([
     },
     "callback" => function ($request, $response, $arguments) {
         print_r($arguments);
-        return $response->withoutHeader("WWW-Authenticate");;
+        //$response->withoutHeader("WWW-Authenticate");
+        return $response;
     }
 ]));
 
-
+*/
 
 $mw = function ($request, $response, $next) {
     $response->getBody()->write('llamada antes de la accion <br>');

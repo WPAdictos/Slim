@@ -23,7 +23,7 @@ class HomeController extends BaseController{
     }
 
     public function token ($request, $response, $args){
-
+        print_r($request->getParsedBody());
         return "HomeController:token";
     }
 }
