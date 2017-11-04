@@ -23,4 +23,10 @@ class AutoresModel extends BaseModel{
         function delete($id){
             return $this->conexion->deleteFrom('autores',$id)->execute();
         }
+
+        function getArticulos($idAutor){
+            //$this->conexion->debug = true;  
+            $columnas=array('articulos.id','articulos.titulo', 'articulos.categoria');
+            return $this->conexion->from('articulos')->select(NULL)->select($columnas)->where('autores_id', $idAutor)->fetchAll();
+        }
 }

@@ -28,4 +28,9 @@ class ArticulosModel extends BaseModel{
     function delete($id){
         return $this->conexion->deleteFrom('articulos',$id)->execute();
     }
+    
+    function showAuthorFromArticle($idArticulo){
+        //$this->conexion->debug = true;  
+        return $this->conexion->from('articulos',$idArticulo)->select(NULL)->select('autores.nombre')->fetch();
+    }
 }

@@ -3,6 +3,7 @@ use \src\models\ArticulosModel;
 use \src\models\AutoresModel;
 use \src\lib\Persona;
 use \src\lib\Marca;
+use \src\lib\Token;
 
 require_once BASE_PATH . '/src/config/'.ENTORNO.'/configDB.php';
 
@@ -43,10 +44,14 @@ $container['logger'] = function($container) {
 };
 
 $container['pdo'] = function ($container) {
-    $container['logger']->addInfo("DSN=", array('dsn' => DSN));
+    //$container['logger']->addInfo("DSN=", array('dsn' => DSN));
     $pdo = new PDO (DSN, USER, PASSWORD);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $pdo;
+};
+
+$container["token"] = function ($container) {
+    return new Token;
 };
 
 $container['notFoundHandler'] = function($container) {

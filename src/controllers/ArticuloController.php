@@ -94,4 +94,14 @@ class ArticuloController extends BaseController{
             return $response->withJson(array('error'=>'Se ha producido un error en el borrado.'), 400);
          }          
     }
+
+    public function showautor($request, $response, $args)
+    {
+        $articulos= $this->container->get('ArticulosModel');
+        if($data=$articulos->showAuthorFromArticle($args['id'])) {
+            return $response->withJson($data, 200);
+         }else{
+            return $response->withJson(array('error'=>'Registro no encontrado'), 404);
+         }       
+    }
 }

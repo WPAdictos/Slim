@@ -29,6 +29,7 @@ $app->group('/articulos', function () {
     $this->post('', ArticuloController::class . ':create');
     $this->put('/{id}',  ArticuloController::class . ':update');
     $this->delete('/{id}',  ArticuloController::class . ':delete');
+    $this->get('/{id}/autor', ArticuloController::class . ':showautor');   
 });
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -39,4 +40,5 @@ $app->group('/autores', function () {
     $this->post('', AutorController::class . ':create');
     $this->put('/{id}',  AutorController::class . ':update');
     $this->delete('/{id}',  AutorController::class . ':delete');
+    $this->get('/{id}/articulos', AutorController::class . ':showarticulos');
 });

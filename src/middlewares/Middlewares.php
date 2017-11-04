@@ -1,6 +1,7 @@
 <?php
 
 use \Slim\Middleware\HttpBasicAuthentication\PdoAuthenticator;
+use \Slim\Middleware\JwtAuthentication;
 
 //Force SSL
 if(FORCE_HTTPS === 'true'){
@@ -30,14 +31,31 @@ $container["HttpBasicAuthentication"] = function ($container) {
         ]),
         "error" => function ($request, $response, $arguments) {
             return $response->withJson(array('error'=>'Credenciales incorrectas'), 403);
+        }
+        
+    ]);
+};
+
+$container["JwtAuthentication"] = function ($container) {
+    return new JwtAuthentication([
+        "path" => "/",
+        "passthrough" => ["/token","/status"],
+        "secret" => getenv("JWT_SECRET"),
+        //"logger" => $container["logger"],
+        "attribute" => false,
+        "relaxed" => ["localhost"],
+        "error" => function ($request, $response, $arguments) {
+            //print_r( $request);
+            return $response->withJson(array('error'=>'No tiene autorizacion'), 401);
+            //return new UnauthorizedResponse($arguments["message"], 401);
         },
-        "callback" => function ($request, $response, $arguments) {
-            //print_r($arguments);
-            //$response->withoutHeader("WWW-Authenticate");
-            return $response;
+        "callback" => function ($request, $response, $arguments) use ($container) {
+            print_r($arguments["decoded"]);
+            //$container["token"]->hydrate($arguments["decoded"]);
         }
     ]);
 };
+$app->add("JwtAuthentication");
 $app->add("HttpBasicAuthentication");
 
 /*

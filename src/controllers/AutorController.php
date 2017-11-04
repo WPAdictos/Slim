@@ -70,4 +70,14 @@ class AutorController extends BaseController
          }            
     }
 
+    public function showarticulos($request, $response, $args)
+    {
+        $autores= $this->container->get('AutoresModel');
+        if($data= $autores->getArticulos($args['id'])) {
+            return $response->withJson($data, 200);
+         }else{
+            return $response->withJson(array('error'=>'Registros no encontrado'), 404);
+         }         
+    }
+
 }
